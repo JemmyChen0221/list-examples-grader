@@ -21,16 +21,15 @@ cp lib/hamcrest-core-1.3.jar student-test
 cp lib/junit-4.13.2.jar student-test
 
 cd student-test
+set +e
 javac -cp .:hamcrest-core-1.3.jar:junit-4.13.2.jar *.java
 if [[ $? -eq 0 ]]; then 
     echo "Succefully Compliled"
 else
     echo "Compile Error"
-    javac -cp .:hamcrest-core-1.3.jar:junit-4.13.2.jar *.java > error.txt
-    exit
+    exit   
 fi
 
-set +e
 java -cp .:hamcrest-core-1.3.jar:junit-4.13.2.jar org.junit.runner.JUnitCore TestListExamples > output.txt
 
 tail -3 output.txt > report.txt
